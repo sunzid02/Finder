@@ -14,8 +14,22 @@
                         </div>
                     @endif
 
-                    You are logged in!
+                    <div class="row">
+                        Hello !!
+                        <div class="col-md-6">
+                            <div class="card">
+                                <img class="card-img-top" src="{{url('uploads/'.Auth::user()->profile_image )}}" alt="{{ Auth::user()->name }}">
+                                <div class="card-body">
+                                    <h4 class="card-title"> Name: {{ Auth::user()->name }}</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
                 </div>
+
+
             </div>
         </div>
     </div>

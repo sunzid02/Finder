@@ -23,6 +23,7 @@ class HomeController extends Controller
      */
     public function index()
     {
+        //        dd( public_path('images/general_exam/'));
         return view('home');
     }
 }

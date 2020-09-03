@@ -8,7 +8,7 @@
                 <div class="panel-heading">Register</div>
 
                 <div class="panel-body">
-                    <form class="form-horizontal" method="POST" action="{{ route('register') }}">
+                    <form class="form-horizontal" enctype="multipart/form-data" method="POST" action="{{ route('register') }}">
                         {{ csrf_field() }}
 
                         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
@@ -64,10 +64,10 @@
 
                         {{--gender--}}
                         <div class="form-group{{ $errors->has('gender') ? ' has-error' : '' }}">
-                            <label for="password" class="col-md-4 control-label">Gender</label>
+                            <label for="gender" class="col-md-4 control-label">Gender</label>
 
                             <div class="col-md-6">
-                                <select class="form-control" required name="gender">
+                                <select class="form-control" required name="gender" id="gender">
                                     <option value=""> Please Select </option>
                                     <option value="male">Male</option>
                                     <option value="female">Female</option>
@@ -77,6 +77,25 @@
                                         <strong>{{ $errors->first('gender') }}</strong>
                                     </span>
                                 @endif
+                            </div>
+                        </div>
+
+                        {{-- dob--}}
+                        <div class="form-group">
+                            <label for="dob" class="col-md-4 control-label">Date of Birth</label>
+
+                            <div class="col-md-6">
+                                <input id="dob" name="dob" type="date" class="form-control"  required>
+                            </div>
+                        </div>
+
+
+                        {{-- profile image--}}
+                        <div class="form-group">
+                            <label for="profileImage" class="col-md-4 control-label"> Profile Picture </label>
+
+                            <div class="col-md-6">
+                                <input type="file" name="profileImage" id="profileImage"  class="form-control"  required>
                             </div>
                         </div>
 

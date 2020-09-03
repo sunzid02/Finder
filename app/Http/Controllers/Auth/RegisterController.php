@@ -6,6 +6,10 @@ use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
+
 
 class RegisterController extends Controller
 {
@@ -28,15 +32,21 @@ class RegisterController extends Controller
      * @var string
      */
     protected $redirectTo = '/home';
+    /**
+     * @var Request
+     */
+    private $request;
 
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct()
+
+    public function __construct(Request $request)
     {
         $this->middleware('guest');
+        $this->request = $request;
     }
 
     /**
@@ -61,15 +71,35 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \App\User
      */
-    protected function create(array $data)
+    protected function create(array $data )
     {
+        // $position = \Location::get('103.133.140.9');
+        // getting location
+        $position = \Location::get($this->request->getClientIp());
+        $data['location'] = json_encode($position);
+
+        ////image store
+        $profileImage = $data['profileImage'];
+        $extension = $profileImage->getClientOriginalExtension();
+//        dd($profileImage->getFilename().'.'.$extension);
+        Storage::disk('public')->put($profileImage->getFilename().'.'.$extension,  File::get($profileImage));
+
+
+        
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
-            'location' => 'asdasd asdasd ',
+            'location' => $data['location'],
+            'profile_image' => $profileImage->getFilename().'.'.$extension,
             'gender' => $data['gender'],
-            'dob' => '1996-09-10',
+            'dob' => $data['dob'],
         ]);
+        
+        
+    }
+
+    protected function imageStore(Request $request)
+    {
     }
 }
