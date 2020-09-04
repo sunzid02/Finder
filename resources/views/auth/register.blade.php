@@ -95,7 +95,12 @@
                             <label for="profileImage" class="col-md-4 control-label"> Profile Picture </label>
 
                             <div class="col-md-6">
-                                <input type="file" name="profileImage" id="profileImage"  class="form-control"  required>
+                                <input type="file" name="profileImage" id="profileImage"  class="form-control"  accept="image/*">
+                                @if ($errors->has('profileImage'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('profileImage') }}</strong>
+                                </span>
+                                @endif
                             </div>
                         </div>
 

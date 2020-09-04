@@ -43,10 +43,9 @@ class RegisterController extends Controller
      * @return void
      */
 
-    public function __construct(Request $request)
+    public function __construct()
     {
         $this->middleware('guest');
-        $this->request = $request;
     }
 
     /**
@@ -62,6 +61,7 @@ class RegisterController extends Controller
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
             'gender' => 'required|string',
+            'profileImage'=>'required|image|mimes:jpeg,png,jpg|max:100',
         ]);
     }
 
@@ -73,24 +73,25 @@ class RegisterController extends Controller
      */
     protected function create(array $data )
     {
-        // $position = \Location::get('103.133.140.9');
         // getting location
-        $position = \Location::get($this->request->getClientIp());
-        $data['location'] = json_encode($position);
+//        $position = \Location::get('103.133.140.9');
+        $position = \Location::get(\Request::getClientIp());
+        $latitude = ($position != false) ? $position->latitude : 0.00 ;
+        $longitude = ($position != false) ? $position->longitude : 0.00 ;
+
 
         ////image store
         $profileImage = $data['profileImage'];
         $extension = $profileImage->getClientOriginalExtension();
-//        dd($profileImage->getFilename().'.'.$extension);
+
         Storage::disk('public')->put($profileImage->getFilename().'.'.$extension,  File::get($profileImage));
 
-
-        
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
-            'location' => $data['location'],
+            'latitude' => $latitude,
+            'longitude' => $longitude,
             'profile_image' => $profileImage->getFilename().'.'.$extension,
             'gender' => $data['gender'],
             'dob' => $data['dob'],
@@ -99,7 +100,4 @@ class RegisterController extends Controller
         
     }
 
-    protected function imageStore(Request $request)
-    {
-    }
 }
