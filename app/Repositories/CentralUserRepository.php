@@ -75,4 +75,20 @@ class CentralUserRepository implements CentralUserRepositoryInterface
         return $desiredUserList;
     }
 
+    public function updateCurrentLocation()
+    {
+        $position = \Location::get(\Request::getClientIp());
+        $latitude = ($position != false) ? $position->latitude : 0.00 ;
+        $longitude = ($position != false) ? $position->longitude : 0.00 ;
+
+
+
+        User::where('id', Auth::user()->id)->update([
+            'latitude' => $latitude,
+            'longitude' => $longitude,
+        ]);
+
+        return true;
+    }
+
 }

@@ -47,6 +47,7 @@
         const locations = [];
 
         var map_canvas = document.getElementById('map');
+
         var latlng = new google.maps.LatLng( loggedInUserLat, loggedInUserLon);
 
         //// Initialise the map
@@ -56,6 +57,7 @@
             mapTypeId: google.maps.MapTypeId.ROADMAP
         }
         var map = new google.maps.Map(map_canvas, map_options)
+
 
         // Put all locations into array
         for (var key in users) {
@@ -70,7 +72,7 @@
             labelIndex = 0;
             const contentString =
                 '<div id="content">' +
-                    value.name +
+                value.name +
                 "</div>";
 
             const infowindow = new google.maps.InfoWindow({
@@ -87,8 +89,8 @@
 
         }
 
+        // console.log(locations);
 
-        console.log(locations);
 
 
 

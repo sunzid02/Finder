@@ -1,0 +1,93 @@
+APP_NAME=Laravel
+APP_ENV=local
+APP_KEY=base64:d+WgR7l7sTti8JvPjaBEY2mU5pQppn3IV26qdjdAxhg=
+APP_DEBUG=true
+APP_LOG_LEVEL=debug
+APP_URL=http://sunzid.rupaie.com
+
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=rupaqwlt_finder
+DB_USERNAME=rupaqwlt_finder
+DB_PASSWORD=!Tg0AcK!rCU8
+
+BROADCAST_DRIVER=log
+CACHE_DRIVER=file
+SESSION_DRIVER=file
+SESSION_LIFETIME=120
+QUEUE_DRIVER=sync
+
+REDIS_HOST=127.0.0.1
+REDIS_PASSWORD=null
+REDIS_PORT=6379
+
+MAIL_DRIVER=smtp
+MAIL_HOST=smtp.mailtrap.io
+MAIL_PORT=2525
+MAIL_USERNAME=dea79b6279255a
+MAIL_PASSWORD=20bc321cbb9859
+MAIL_ENCRYPTION=tls
+
+PUSHER_APP_ID=
+PUSHER_APP_KEY=
+PUSHER_APP_SECRET=
+PUSHER_APP_CLUSTER=mt1
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<IfModule mod_rewrite.c>
+    <IfModule mod_negotiation.c>
+        Options -MultiViews -Indexes
+    </IfModule>
+
+    RewriteEngine On
+
+    # Handle Authorization Header
+    RewriteCond %{HTTP:Authorization} .
+    RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+
+    # Redirect Trailing Slashes If Not A Folder...
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_URI} (.+)/$
+    RewriteRule ^ %1 [L,R=301]
+
+    # Handle Front Controller...
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule ^ index.php [L]
+</IfModule>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -6,6 +6,7 @@ use App\Repositories\CentralUserRepositoryInterface;
 use Illuminate\Http\Request;
 use App\User;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -34,6 +35,10 @@ class HomeController extends Controller
     {
 
         $users = $this->centralUserRepository->desiredUserList();
+
+
+        ////update user current location
+//        $this->centralUserRepository->updateCurrentLocation();
 
 //        $users = [];
 

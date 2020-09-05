@@ -92,7 +92,8 @@
 
         function like(userId) {
             $.ajax({
-                url: "/like/"+userId,
+                url: '{{ url('like') }}/'+userId,
+
                 type: 'GET',
                 success: function(res) {
                     console.log(res);
@@ -116,7 +117,7 @@
 
         function dislike(userId) {
             $.ajax({
-                url: "/dislike/"+userId,
+                url: '{{ url('dislike') }}/'+userId,
                 type: 'GET',
                 success: function(res) {
                     console.log(res);
@@ -131,6 +132,7 @@
                 }
             });
         }
+
 
 
 

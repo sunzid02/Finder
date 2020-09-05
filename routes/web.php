@@ -15,17 +15,17 @@ Route::get('/', function () {
     return redirect()->route('home');
 });
 
+
+Route::get('/clear-cache', function() {
+    Artisan::call('cache:clear');
+    Artisan::call('config:cache');
+});
+
 Auth::routes();
+
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
-
-Auth::routes();
 
 
 Route::group(['middleware' => ['auth']], function () {
@@ -35,4 +35,5 @@ Route::group(['middleware' => ['auth']], function () {
 
 });
 
-/*{{--                            <iframe width="100%" height="500" src="https://maps.google.com/maps?q=<?php echo 23.718176; ?>,<?php echo 90.386604; ?>&output=embed"></iframe>--}}*/
+
+
