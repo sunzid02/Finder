@@ -20,18 +20,16 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 
-//Route::group(['middleware' => ['auth']], function () {
-//    Route::get('/chat', 'ChatController@index')->name('chat.index');
-//    Route::get('/chat/{id}', 'ChatController@show')->name('chat.show');
-//
-//    Route::post('/chat/get-chat/{id}', 'ChatController@getChat')->name('chat.getChat');
-//
-//
-//});
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+
+Route::group(['middleware' => ['auth']], function () {
+    Route::get('/like/{userId}', 'ActivityController@like')->name('activity.like');
+    Route::get('/dislike/{userId}', 'ActivityController@dislike')->name('activity.dislike');
+
+});

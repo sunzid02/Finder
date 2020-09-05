@@ -69,6 +69,10 @@
                                     </li>
                                 </ul>
                             </li>
+
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                {{ csrf_field() }}
+                            </form>
                         @endguest
                     </ul>
                 </div>
@@ -80,6 +84,6 @@
 
     <!-- Scripts -->
 {{--    <script src="{{ asset('js/app.js') }}"></script>--}}
-    <script src="/js/app.js"></script>
+{{--    <script src="/js/app.js"></script>--}}
 </body>
 </html>

@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Location\Coordinate;
 use Location\Distance\Vincenty;
+use Carbon\Carbon;
 
 
 class CentralUserRepository implements CentralUserRepositoryInterface
@@ -43,6 +44,8 @@ class CentralUserRepository implements CentralUserRepositoryInterface
                 $calculator = new Vincenty();
 
                 $distance = ceil($calculator->getDistance($currentUserCoordinate, $coordinate2)/1000);//calculate in km
+                $user->age = Carbon::parse($user->dob)->diff(\Carbon\Carbon::now())->format('%y years');
+//                $user->age = Carbon::parse($user->dob)->diff(\Carbon\Carbon::now())->format('%y years, %m months and %d days');;
 
                 $user->distance = $distance;
                 if ($distance <= $targetRange)

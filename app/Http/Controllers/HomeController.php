@@ -34,6 +34,7 @@ class HomeController extends Controller
     {
 
         $users = $this->centralUserRepository->desiredUserList();
+
 //        $users = [];
 
         return view('home', [

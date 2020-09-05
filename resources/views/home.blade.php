@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <div class="row">
-        <div class="col-md-8 col-md-offset-2">
+        <div class="col-md-12">
             <div class="panel panel-default">
                 <div class="panel-heading">Dashboard</div>
 
@@ -40,6 +40,8 @@
                                 <th>Name</th>
                                 <th>Picture</th>
                                 <th>Distance </th>
+                                <th>Gender </th>
+                                <th>Age </th>
                                 <th>Action</th>
                             </tr>
                             </thead>
@@ -54,7 +56,16 @@
                                                 >
                                             </td>
                                             <td> {{ $user->distance }} km </td>
-                                            <td> Like me! </td>
+                                            <td> {{ $user->gender }}  </td>
+                                            <td> {{ $user->age }}  </td>
+
+
+                                            <td>
+                                                <div class="row">
+                                                    <button class="btn btn-primary" id="likeBtn" onclick="like(<?php echo $user->id; ?>)"> Like </Button>
+                                                    <button class="btn btn-danger" id="dislikeBtn"  onclick="dislike(<?php echo $user->id; ?>)"> Dislike</Button>
+                                                </div>
+                                            </td>
                                         </tr>
                                     @empty
                                     <tr>
@@ -73,4 +84,51 @@
         </div>
     </div>
 </div>
+
+    <script>
+
+        function like(userId) {
+            $.ajax({
+                url: "/like/"+userId,
+                type: 'GET',
+                success: function(res) {
+                    console.log(res);
+                    alert( JSON.parse(res).message );
+                },
+                error: function () {
+                    alert('Try again later');
+                }
+            });
+
+        }
+
+        function dislike(userId) {
+            $.ajax({
+                url: "/dislike/"+userId,
+                type: 'GET',
+                success: function(res) {
+                    console.log(res);
+                    alert( JSON.parse(res).message );
+                },
+                error: function () {
+                    alert('Try again later');
+                }
+            });
+        }
+
+
+
+
+        // $(document).ready(function(){
+        //     $("#likeBtn").click(function(){
+        //
+        //        $("#likeBtn").attr("disabled", true);
+        //     });
+        //
+        //     $("#dislikeBtn").click(function(){
+        //        alert('disliked');
+        //         $("#dislikeBtn").attr("disabled", true);
+        //     });
+        // });
+    </script>
 @endsection
