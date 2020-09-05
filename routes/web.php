@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('home');
 });
 
 Auth::routes();
@@ -31,5 +31,8 @@ Auth::routes();
 Route::group(['middleware' => ['auth']], function () {
     Route::get('/like/{userId}', 'ActivityController@like')->name('activity.like');
     Route::get('/dislike/{userId}', 'ActivityController@dislike')->name('activity.dislike');
+    Route::get('users/map', 'ActivityController@map')->name('activity.map');
 
 });
+
+/*{{--                            <iframe width="100%" height="500" src="https://maps.google.com/maps?q=<?php echo 23.718176; ?>,<?php echo 90.386604; ?>&output=embed"></iframe>--}}*/

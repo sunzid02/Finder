@@ -16,7 +16,7 @@ class CentralUserRepository implements CentralUserRepositoryInterface
 {
     //See other user list (in a table or any other simplified view) around ​ 5 KM ​ (Using geolocation
     //distance driven query)
-    public function desiredUserList()
+    public function desiredUserList( $mode="notMap" )
     {
         $currentUser = Auth::user();
 
@@ -48,11 +48,21 @@ class CentralUserRepository implements CentralUserRepositoryInterface
 //                $user->age = Carbon::parse($user->dob)->diff(\Carbon\Carbon::now())->format('%y years, %m months and %d days');;
 
                 $user->distance = $distance;
-                if ($distance <= $targetRange)
+                if ($mode != 'map')
                 {
-                    $desiredUserList[$i] = $user;
-                }
+                    if ($distance <= $targetRange)
+                    {
+                        $desiredUserList[$i] = $user;
+                    }
 
+                }
+                else
+                {
+                    if ($distance <= $targetRange)
+                    {
+                        $desiredUserList[$i] = (array)$user;
+                    }
+                }
                 $i++;
             }
 
@@ -64,4 +74,5 @@ class CentralUserRepository implements CentralUserRepositoryInterface
 
         return $desiredUserList;
     }
+
 }

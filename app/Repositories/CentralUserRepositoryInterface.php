@@ -4,5 +4,5 @@ namespace App\Repositories;
 
 interface CentralUserRepositoryInterface
 {
-    public function desiredUserList();
+    public function desiredUserList($mode);
 }

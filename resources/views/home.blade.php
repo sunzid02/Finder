@@ -5,7 +5,7 @@
     <div class="row">
         <div class="col-md-12">
             <div class="panel panel-default">
-                <div class="panel-heading">Dashboard</div>
+                <div class="panel-heading">User List</div>
 
                 <div class="panel-body">
                     @if (session('status'))
@@ -37,6 +37,7 @@
                         <table class="table">
                             <thead>
                             <tr>
+                                <th>Sl.</th>
                                 <th>Name</th>
                                 <th>Picture</th>
                                 <th>Distance </th>
@@ -46,8 +47,12 @@
                             </tr>
                             </thead>
                             <tbody>
+                                    @php
+                                        $sl = 0;
+                                    @endphp
                                     @forelse($users as $user)
                                         <tr>
+                                            <td> #{{ ++ $sl }}</td>
                                             <td> {{ $user->name }}</td>
                                             <td>
                                                 <img class="card-img-top" src="{{url('uploads/'.$user->profile_image )}}" alt="{{ $user->name }}"
@@ -75,8 +80,6 @@
                             </tbody>
                         </table>
                     </div>
-
-
                 </div>
 
 
