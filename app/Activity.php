@@ -15,6 +15,7 @@ class Activity extends Model
     {
         $loggedUserId = Auth::user()->id;
 
+
         return Activity::where([
             'name' => $action,
             'acted_on' => $userId,

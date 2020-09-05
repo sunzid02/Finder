@@ -62,8 +62,8 @@
 
                                             <td>
                                                 <div class="row">
-                                                    <button class="btn btn-primary" id="likeBtn" onclick="like(<?php echo $user->id; ?>)"> Like </Button>
-                                                    <button class="btn btn-danger" id="dislikeBtn"  onclick="dislike(<?php echo $user->id; ?>)"> Dislike</Button>
+                                                    <button class="btn btn-primary" id="<?php echo "likeBtn".$user->id?>" onclick="like(<?php echo $user->id; ?>)"> Like </Button>
+                                                    <button class="btn btn-danger" id="<?php echo "dislikeBtn".$user->id?>"  onclick="dislike(<?php echo $user->id; ?>)"> Dislike </Button>
                                                 </div>
                                             </td>
                                         </tr>
@@ -94,6 +94,15 @@
                 success: function(res) {
                     console.log(res);
                     alert( JSON.parse(res).message );
+
+                    if (JSON.parse(res).match_notification === true)
+                    {
+                        alert('It\'s a Match!');
+                    }
+
+                    $("#likeBtn"+userId).attr("disabled", true);
+                    $("#dislikeBtn"+userId).prop("disabled", false);
+
                 },
                 error: function () {
                     alert('Try again later');
@@ -109,6 +118,10 @@
                 success: function(res) {
                     console.log(res);
                     alert( JSON.parse(res).message );
+
+                    $("#dislikeBtn"+userId).attr("disabled", true);
+                    $("#likeBtn"+userId).prop('disabled', false);
+
                 },
                 error: function () {
                     alert('Try again later');
