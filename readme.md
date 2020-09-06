@@ -6,14 +6,11 @@
 longitude), Date of Birth and Gender
 2. Upload single profile photo
 3. Login panel with email and password
-4. See other user list (in a table or any other simplified view) around ​ 5 KM ​ (Using geolocation
-distance driven query)
+4. See other user list (in a table or any other simplified view) around ​ 5 KM 
 5. Show user Name, image, distance, gender and age in user list
 6. A like and dislike button for each user. Keep like and dislike mapping in database.
 7. Mutual like indication - Show a popup with a message (It's a Match!) if user like one person and
-the liked person previously likes him. (​ Use Case:​ Consider two user - ​ ‘A’ ​ and ‘ ​ B’​ . User ‘ ​ A’ ​ logged
-in and likes ​ ‘B’s ​ profile. Once ​ ‘B’ ​ logged in and likes ​ ‘A’s ​ profile - a simple popup will be invoked
-with the message.)
+the liked person previously likes him.
 
 
 
