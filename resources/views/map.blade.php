@@ -50,6 +50,7 @@
 
         var latlng = new google.maps.LatLng( loggedInUserLat, loggedInUserLon);
 
+
         //// Initialise the map
         var map_options = {
             center: latlng,
@@ -57,7 +58,6 @@
             mapTypeId: google.maps.MapTypeId.ROADMAP
         }
         var map = new google.maps.Map(map_canvas, map_options)
-
 
         // Put all locations into array
         for (var key in users) {
@@ -95,6 +95,7 @@
 
 
     }
+
     google.maps.event.addDomListener(window, 'load', initialize);
 </script>
 @endsection
