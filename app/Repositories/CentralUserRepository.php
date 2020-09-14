@@ -4,6 +4,7 @@
 namespace App\Repositories;
 
 
+use App\Activity;
 use App\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -27,10 +28,22 @@ class CentralUserRepository implements CentralUserRepositoryInterface
 
 
         $allUsers = DB::table('users')
-                    ->select('*')
-//                    ->where('id', '=', 456)
-                    ->where('id', '!=', $currentUser->id)
+                    ->select('a.*')
+                    ->from('users as a')
+                    ->where('a.id', '!=', $currentUser->id)
                     ->get();
+
+//        $allUsers = DB::table('users')
+//                    ->select('a.*', 'b.name as activity_name')
+//                    ->from('users as a')
+//                    ->leftJoin('activities as b', 'a.id', '=', 'b.acted_by')
+////                    ->where('id', '=', 456)
+//                    ->where('a.id', '=', $currentUser->id)
+//                    ->get();
+
+//        echo "<pre>"; print_r($allUsers); dd();
+//        echo "<pre>"; print_r(User::find(4)->activities->toArray()); dd();
+
 
         $desiredUserList = [];
         $targetRange = 5;
@@ -40,14 +53,36 @@ class CentralUserRepository implements CentralUserRepositoryInterface
             $i = 0;
             foreach($allUsers as $user)
             {
+//                echo "<pre>";
+//                print_r(User::find($user->id)->activitites);
+//                die();
+
+
                 $coordinate2 = new Coordinate( $user->latitude, $user->longitude );
                 $calculator = new Vincenty();
 
                 $distance = ceil($calculator->getDistance($currentUserCoordinate, $coordinate2)/1000);//calculate in km
                 $user->age = Carbon::parse($user->dob)->diff(\Carbon\Carbon::now())->format('%y years');
-//                $user->age = Carbon::parse($user->dob)->diff(\Carbon\Carbon::now())->format('%y years, %m months and %d days');;
+                //                $user->age = Carbon::parse($user->dob)->diff(\Carbon\Carbon::now())->format('%y years, %m months and %d days');;
+
 
                 $user->distance = $distance;
+                $user->profile_image_path = url('uploads/'.$user->profile_image );
+
+                if (
+                    $activity = Activity::where([
+                        'acted_on' => $user->id,
+                        'acted_by' => Auth::user()->id
+                    ])->first()
+                )
+                {
+                    $user->activity_name = $activity->name;
+                }
+                else
+                {
+                    $user->activity_name = 'None';
+                }
+
                 if ($mode != 'map')
                 {
                     if ($distance <= $targetRange)
@@ -67,12 +102,12 @@ class CentralUserRepository implements CentralUserRepositoryInterface
             }
 
         }
-//        echo "<pre>";
-//        print_r($desiredUserList);
-//        die();
+        //        echo "<pre>";
+        //        print_r($desiredUserList);
+        //        die();
+        //
 
-
-        return $desiredUserList;
+        return array_values($desiredUserList);
     }
 
     public function updateCurrentLocation()

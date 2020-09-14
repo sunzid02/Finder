@@ -22,4 +22,10 @@ class Activity extends Model
             'acted_by' => $loggedUserId
         ])->get()->count();
     }
+
+    public function user()
+    {
+        return $this->belongsTo('App\User');
+    }
+
 }

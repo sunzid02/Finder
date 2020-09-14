@@ -1,0 +1,5 @@
+                // action
+                            {{--userRow += '<td>' +--}}
+                            {{--      '<button class="btn btn-primary" id="<?php echo "likeBtn" . user.id?>" onclick="like(<?php echo $user->id; ?>)"> Like </Button>'--}}
+                            {{--    + '<button class="btn btn-danger" id="<?php echo "dislikeBtn" . user.id?>"  onclick="dislike(<?php echo $user->id; ?>)"> Dislike </Button>'--}}
+                            {{--+ '</td>';--}}

@@ -59,6 +59,17 @@
         }
         var map = new google.maps.Map(map_canvas, map_options)
 
+
+        locations.push(23.759739);
+        locations.push(90.392418);
+
+        var marker = new google.maps.Marker({
+            position: new google.maps.LatLng(23.759739, 90.392418),
+            map: map,
+            draggable: false,
+            anchorPoint: new google.maps.Point(0, -29),
+        });
+
         // Put all locations into array
         for (var key in users) {
             var value = users[key];
@@ -89,7 +100,7 @@
 
         }
 
-        // console.log(locations);
+        console.log(locations);
 
 
 

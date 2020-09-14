@@ -33,6 +33,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/dislike/{userId}', 'ActivityController@dislike')->name('activity.dislike');
     Route::get('users/map', 'ActivityController@map')->name('activity.map');
 
+    Route::get('home-users', 'HomeController@userList')->name('home.userList');
+
 });
 
 
